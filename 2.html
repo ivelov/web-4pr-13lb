@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Лаба 13</title>
+  </head>
+  <body>
+    <script>
+        function run() {
+          let dateStr = prompt('Enter date', '13.05.2023');
+          let dateParts = [];
+          if(dateStr.split('.').length > 1){
+            dateParts = dateStr.split('.');
+          }else if(dateStr.split('/').length > 1){
+            dateParts = dateStr.split('/');
+          }else if(dateStr.split('-').length > 1){
+            dateParts = dateStr.split('-');
+          }
+          let date = new Date(dateParts[2], dateParts[1]-1, dateParts[0]);
+
+          let curDate = new Date();
+
+          date.setHours(12);
+          curDate.setHours(12);
+          date.setMinutes(0);
+          curDate.setMinutes(0);
+          date.setSeconds(0);
+          curDate.setSeconds(0);
+          date.setMilliseconds(0);
+          curDate.setMilliseconds(0);
+
+          let diffInSeconds = (curDate - date) / 1000;
+          if(diffInSeconds < 10){
+            alert('Сьогоднi');
+          }else if(diffInSeconds <= 86400){
+            alert('Вчора');
+          }else if(diffInSeconds <= 86400*6){
+            let days = diffInSeconds /86400
+            alert(days+' днi тому');
+          }else if(diffInSeconds <= 86400*7){
+            alert('Тиждень тому');
+          }else if(curDate.getFullYear() - date.getFullYear() === 1){
+            alert('Рiк тому');
+          }else{
+            alert(`${date.getFullYear()}.${date.getMonth()<9?'0'+(date.getMonth()+1):date.getMonth()+1}.${date.getDate()<10?'0'+(date.getDate()):date.getDate()}`)
+          }
+        }
+
+        run();
+    </script>
+  </body>
+</html>
